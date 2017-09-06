@@ -2,6 +2,8 @@
 
 koa: 腾讯微校第三方应用快速开发路由。
 
+本路由将请求签名验证、时间戳验证、微校json数据解析、微信xml数据解析等操作进行了封装。
+
 ## 如何使用
 
 ### 安装
@@ -23,7 +25,7 @@ const bodyParser = require('koa-bodyparser');
 
 app.use(async (ctx, next) => {
   // fuck: 微校提交的请求内容本身和其提供的 content-type 并不一致
-  if (ctx.path === '/weixiao') {
+  if (ctx.path === '/weixiao'/* 微校应用的路由 */) {
     ctx.disableBodyParser = true;
   }
   await next();
@@ -47,36 +49,53 @@ module.exports = weixiaoController({
     token: 'your token' // 仅 `消息回复类` 应用需要
   },
   hooks: {
-    async open(ctx, { mediaId }) {
+    async open(ctx, { mediaId, Weixiao }) {
+      // 应用开启
+
       // 在这里执行一些应用开启相关操作
-      ctx.body =
+
+      ctx.body = Weixiao.generateResponse({
+        token: 'hello',
+        is_config: 1
+      });
+    },
+    async trigger(ctx, { body, mediaId }) {
+      // 应用触发
+
+      // 如果是消息回复类应用
+      ctx.body = `<xml><ToUserName><![CDATA[${body.FromUserName}]]></ToUserName>.............</xml>`;
+
+      // 如果是网页应用
+      ctx.redirect('http://baidu.com'/* 应用的网页地址 */);
+    },
+    async keyword(ctx, { body, mediaId }) {
+      // 关键词更新
+
+      // 一些操作, 如: db.table('apps').where({ mediaId }).update({ keywords: body.keyword });
+    },
+    async config(ctx, { mediaId }) {
+      // 打开配置页面
+
+      // 一些操作, 如: ctx.render('config', { mediaId });
+    },
+    async monitor(ctx, { mediaId }) {
+      // 应用监控
+
+      // 执行一些操作, 默认会执行操作: ctx.body = ctx.query.echostr;
     }
   }
 });
-
-
-
-import './assets/iconfont.js'; // Symbol 代码
-import 'vue-iconfont/style/icon.css'; // 样式文件
-import vueIconfont from 'vue-iconfont'; // icon 组件
-
-Vue.use(vueIconfont);
-// 或
-Vue.use(vueIconfont, {
-  label: 'icon' // label 默认是 icon
-});
-// 或
-Vue.component('icon', vueIconfont);
 ```
 
-`App.vue`：
+`index.js`：
 
-```html
-<!-- // 不指定 size，图标大小依父元素而定 -->
-<icon name="star"></icon>
+```javascript
+// .....
 
-<!-- // 指定 size，图标大小自己做主，单位：px -->
-<icon name="star" :size="20"></icon>
-<!-- // 这等价于 -->
-<icon name="star" :width="20" :height="20"></icon>
+const router = require('koa-router')();
+const weixiaoController = require('./controllers/weixiao.controller.js');
+
+router.all('/weixiao', weixiaoController);
+
+// .....
 ```
