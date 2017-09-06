@@ -1,6 +1,6 @@
 {
   "name": "koa-weixiao-controller",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "koa: 腾讯微校第三方应用快速开发路由",
   "author": {
     "name": "Funch",
