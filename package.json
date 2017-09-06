@@ -1,0 +1,28 @@
+{
+  "name": "koa-weixiao-controller",
+  "version": "1.0.0",
+  "description": "koa: 腾讯微校第三方应用快速开发路由",
+  "author": {
+    "name": "Funch",
+    "email": "fjc0kb@gmail.com"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "homepage": "https://github.com/fjc0k/koa-weixiao-controller#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fjc0k/koa-weixiao-controller.git"
+  },
+  "keywords": [
+    "koa",
+    "weixiao",
+    "controller"
+  ],
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "qs": "^6.5.0",
+    "raw-body": "^2.3.0",
+    "weixiao.js": "^2.1.0",
+    "xml2js": "^0.4.19"
+  }
+}
