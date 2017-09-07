@@ -51,7 +51,8 @@ controllers.entry = async ctx => {
       await $hooks[type](ctx, {
         body: ctx.request.body,
         mediaId,
-        Weixiao
+        Weixiao,
+        weixiao: wx
       });
     }
   };
