@@ -70,7 +70,7 @@ const entry = ({ api = {}, hooks = {} } = {}) => {
   return controllers.entry;
 };
 
-entry.compatibleWithBodyParser = async (weixiaoPath = '/weixiao') => {
+entry.compatibleWithBodyParser = (weixiaoPath = '/weixiao') => {
   return async (ctx, next) => {
     // fuck: 微校提交的请求内容本身和 content-type 不一致
     if (ctx.path === weixiaoPath) {
