@@ -58,7 +58,7 @@ controllers.entry = async ctx => {
   };
 });
 
-module.exports = ({ api = {}, hooks = {} } = {}) => {
+const entry = ({ api = {}, hooks = {} } = {}) => {
   if (typeof api !== 'object') {
     throw new TypeError('api must be an object');
   }
@@ -69,3 +69,15 @@ module.exports = ({ api = {}, hooks = {} } = {}) => {
   $hooks = hooks;
   return controllers.entry;
 };
+
+entry.compatibleWithBodyParser = async (weixiaoPath = '/weixiao') => {
+  return async (ctx, next) => {
+    // fuck: 微校提交的请求内容本身和 content-type 不一致
+    if (ctx.path === weixiaoPath) {
+      ctx.disableBodyParser = true;
+    }
+    await next();
+  };
+};
+
+module.exports = entry;

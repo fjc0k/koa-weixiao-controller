@@ -22,14 +22,9 @@ npm install koa-weixiao-controller -S
 ```javascript
 const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
+const weixiaoController = require('koa-weixiao-controller');
 
-app.use(async (ctx, next) => {
-  // fuck: 微校提交的请求内容本身和其提供的 content-type 并不一致
-  if (ctx.path === '/weixiao'/* 微校应用的路由 */) {
-    ctx.disableBodyParser = true;
-  }
-  await next();
-});
+app.use(weixiaoController.compatibleWithBodyParser('/weixiao'/* 应用路径 */));
 app.use(bodyParser());
 
 // ........
