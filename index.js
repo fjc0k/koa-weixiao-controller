@@ -11,6 +11,12 @@ controllers.entry = async ctx => {
   if (!type || !action) {
     ctx.body = Weixiao.generateResponse({ msg: 'type err' }, 5006);
   } else {
+
+    // 网页应用触发, 不经过验证!!!
+    if (type === 'trigger' && ctx.request.method === 'GET') {
+      return await action(ctx, ctx.query.media_id);
+    }
+
     ctx.request.body = await new Body(ctx)[
       type === 'trigger' ? 'parseWechatXML' : 'parseJSON'
     ]();

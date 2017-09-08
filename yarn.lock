@@ -99,9 +99,9 @@ unpipe@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/unpipe/-/unpipe-1.0.0.tgz#b2bf4ee8514aae6165b4817829d21b2ef49904ec"
 
-weixiao.js@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/weixiao.js/-/weixiao.js-2.1.1.tgz#f35c68e0f69f17ac9977d7a7593ccd795b9f09ba"
+weixiao.js@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/weixiao.js/-/weixiao.js-2.1.2.tgz#81737c88e776d92c702cd7962d441a4d7989428b"
   dependencies:
     axios "^0.16.2"
     blueimp-md5 "^2.7.0"
