@@ -1,6 +1,6 @@
 {
   "name": "koa-weixiao-controller",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "koa: 腾讯微校第三方应用快速开发路由",
   "author": {
     "name": "Funch",
@@ -22,7 +22,7 @@
     "lodash": "^4.17.4",
     "qs": "^6.5.0",
     "raw-body": "^2.3.0",
-    "weixiao.js": "^2.1.1",
+    "weixiao.js": "^2.1.2",
     "xml2js": "^0.4.19"
   }
 }
