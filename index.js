@@ -78,8 +78,9 @@ const entry = ({ api = {}, hooks = {} } = {}) => {
 
 entry.compatibleWithBodyParser = (weixiaoPath = '/weixiao') => {
   return async (ctx, next) => {
+    weixiaoPath = Array.isArray(weixiaoPath) ? weixiaoPath : [ weixiaoPath ];
     // fuck: 微校提交的请求内容本身和 content-type 不一致
-    if (ctx.path === weixiaoPath) {
+    if (weixiaoPath.indexOf(ctx.path) !== -1) {
       ctx.disableBodyParser = true;
     }
     await next();
